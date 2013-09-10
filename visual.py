@@ -5,12 +5,12 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
 	# only to generate predictions.npy
-f="knnPredictions.csv" # file with predictions
-csv_reader = csv.reader(open(f, "r"))
-data = []
-for row in csv_reader:
-	data.append(np.array(np.int64(row)))
-np.save('predictions.npy', data)
+# f="knnPredictions.csv" # file with predictions
+# csv_reader = csv.reader(open(f, "r"))
+# data = []
+# for row in csv_reader:
+# 	data.append(np.array(np.int64(row)))
+# np.save('predictions.npy', data)
 
 	# to plot the train sample 
 # image = np.load('train_small.npy')
