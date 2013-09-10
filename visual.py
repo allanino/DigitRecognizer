@@ -22,6 +22,7 @@ prediction = np.load('predictions.npy')
 
 img = np.eye(28,dtype=int)
 
+# Show images and predictions from lines argv[1] to argv[2]
 for k in range(int(argv[1]),int(argv[2])):
 	for i in range(0,28):
 		for j in range(0,28):
