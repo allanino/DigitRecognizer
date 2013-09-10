@@ -68,34 +68,35 @@ class PredScore:
 if __name__ == '__main__':
     print 'read data!'
     #only use the below for initial creation of npy files
-#    train, labels = read_data("train.csv", rows=1000)
-#    np.save('train_small.npy', train)
-#    np.save('labels_small.npy', labels)
+    #train, labels = read_data("train.csv", rows=1000)
+    #np.save('train_small.npy', train)
+    #np.save('labels_small.npy', labels)
 
-#    train = np.load('train_small.npy')
-#    labels = np.load('labels_small.npy')
+    train = np.load('train_small.npy')
+    labels = np.load('labels_small.npy')
 
-    train = np.load('train.npy')
-    labels = np.load('labels.npy')
+    #train = np.load('train.npy')
+    #labels = np.load('labels.npy')
 #    
     print 'done reading train'
     
     #only use the below for the initial creation of npy files.
-#    test, tmpl = read_data("test.csv", test=True, rows=1000)
-#    np.save('test_small.npy', test)
-#    np.save('tmpl_small.npy', tmpl)
+    #test, tmpl = read_data("test.csv", test=True, rows=1000)
+    #np.save('test_small.npy', test)
+    #np.save('tmpl_small.npy', tmpl)
 
-#    test = np.load('test_small.npy')
-#    tmpl = np.load('tmpl_small.npy')
-    test = np.load('test.npy')
-    tmpl = np.load('tmpl.npy')
+    test = np.load('test_small.npy')
+    tmpl = np.load('tmpl_small.npy')
+
+    #test = np.load('test.npy')
+    #tmpl = np.load('tmpl.npy')
     print 'done reading test!'
     rfPredictions, rfScore = predictRF(train, labels, test, tmpl)
     knnPredictions, knnScore = predictKNN(train,labels, test)
     svcPredictions, svcScore = predictSVC(train, labels, test)
     retArray = []
     index = 0
-    for rf in rfScore:
+    for rf in knnScore:
         rfPredScore = PredScore(rfPredictions[index],rfScore[index])
         knnPredScore = PredScore(knnPredictions[index],knnScore[index])
         svcPredScore = PredScore(svcPredictions[index],svcScore[index])
@@ -110,6 +111,3 @@ if __name__ == '__main__':
         index = index + 1
     np.savetxt('submission.csv', retArray, delimiter=',',fmt='%i')
     print 'done!!!'
-    
-    
-    
