@@ -35,19 +35,12 @@ def predictKNN(train,labels,test):
     print 'done with knn'
     return predictions, bestScores
 
-class PredScore:
-    def __init__(self,prediction,score):
-        self.prediction = prediction
-        self.score = score
-    prediction = -1
-    score = 0
-
 if __name__ == '__main__':
     print 'read data!'
     #only use the below for initial creation of npy files
-    train, labels = read_data("train.csv", rows=1000)
-    np.save('train_small.npy', train)
-    np.save('labels_small.npy', labels)
+    # train, labels = read_data("train.csv", rows=1000)
+    # np.save('train_small.npy', train)
+    # np.save('labels_small.npy', labels)
 
     train = np.load('train_small.npy')
     labels = np.load('labels_small.npy')
@@ -55,9 +48,9 @@ if __name__ == '__main__':
     print 'done reading train'
     
     #only use the below for the initial creation of npy files.
-    test, tmpl = read_data("test.csv", test=True, rows=1000)
-    np.save('test_small.npy', test)
-    np.save('tmpl_small.npy', tmpl)
+    # test, tmpl = read_data("test.csv", test=True, rows=1000)
+    # np.save('test_small.npy', test)
+    # np.save('tmpl_small.npy', tmpl)
 
     test = np.load('test_small.npy')
     tmpl = np.load('tmpl_small.npy')
