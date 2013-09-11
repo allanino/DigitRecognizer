@@ -1,6 +1,6 @@
 import csv
 
-f="knnPredictions.csv" # file with predictions
+f="submission.csv" # file with predictions
 submission = open("submission.csv", 'r+')
 
 csv_reader = csv.reader(open(f, "r"))
