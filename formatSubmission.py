@@ -1,7 +1,7 @@
 import csv
 
-f="knnPredictions.csv" # file with predictions
-submission = open("submission.csv", 'r+')
+f="rfPredictions.csv" # file with predictions
+submission = open("rfSubmission.csv", 'w+')
 
 csv_reader = csv.reader(open(f, "r"))
 data = "ImageId,Label\n"

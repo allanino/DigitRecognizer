@@ -2,7 +2,7 @@ import scipy
 import numpy as np
 import operator
 import csv
-from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
 
 # loading csv data into numpy array
 def read_data(f, header=True, test=False, rows=0):
@@ -25,20 +25,16 @@ def read_data(f, header=True, test=False, rows=0):
         data.append(np.array(np.int64(row)))
     return (data, labels)
 
-def predictSVC(train, labels, test):
-    print 'start SVC'
-    clf = SVC()
-    clf.fit(train, labels)
-    print 'predicting'
-    svc_predictions = clf.predict(test)
-    # print 'calculation probability'
-    # svc_probs = clf.predict_proba(test)
-    # debugg
-    # np.savetxt('svcProbs.csv', svc_probs, delimiter=',',fmt='%i')
-    ####
-    # svc_bestProbs = svc_probs.max(axis=1)
-    print 'svc done!'
-    return svc_predictions
+def predictRF(train, labels, test, tmpl):
+    print 'predicting...'
+    rf = RandomForestClassifier(n_estimators=2000, n_jobs=2)
+    rf.fit(train, labels)
+    print 'done fitting...'
+    rf_predictions = rf.predict(test)
+    rf_probs = rf.predict_proba(test)
+    rf_BestProbs = rf_probs.max(axis=1)
+    print('done with random forest.  Save text!')
+    return rf_predictions, rf_probs
 
 if __name__ == '__main__':
     print 'read data!'
@@ -50,6 +46,9 @@ if __name__ == '__main__':
     train = np.load('train_small.npy')
     labels = np.load('labels_small.npy')
 
+    #train = np.load('train.npy')
+    #labels = np.load('labels.npy')
+#    
     print 'done reading train'
     
     #only use the below for the initial creation of npy files.
@@ -62,7 +61,8 @@ if __name__ == '__main__':
 
     print 'done reading test!'
 
-    svcPredictions  = predictSVC(train, labels, test)
-    
-    np.savetxt('svcPredictions.csv', svcPredictions, delimiter=',',fmt='%i')
+    rfPredictions, rfScore = predictRF(train, labels, test, tmpl)
+
+    np.savetxt('rfScore2000.csv', rfScore, fmt='%.2f')
+    np.savetxt('rfPredictions2000.csv', rfPredictions, fmt='%i')
     print 'done!!!'

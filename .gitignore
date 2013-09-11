@@ -1,4 +1,4 @@
 *.npy
 *.csv
 *.png
-stats
+stats*
