@@ -29,7 +29,7 @@ if len(argv) == 3:
 		for i in range(0,28):
 			for j in range(0,28):
 				img[i,j] = image[k, i*28 + j]
-		plt.title(prediction[k], fontsize=50)
+		plt.title("Classification: %d" % (prediction[k]), fontsize=40)
 		fig = plt.imshow(img, cmap = cm.Greys_r)
 		fig.axes.get_xaxis().set_visible(False)
 		fig.axes.get_yaxis().set_visible(False)
@@ -41,10 +41,8 @@ else:
 		for i in range(0,28):
 			for j in range(0,28):
 				img[i,j] = image[k, i*28 + j]
-		plt.title(prediction[k], fontsize=50)
+		plt.title("Classification: %d" % (prediction[k]), fontsize=40)
 		fig = plt.imshow(img, cmap = cm.Greys_r)
 		fig.axes.get_xaxis().set_visible(False)
 		fig.axes.get_yaxis().set_visible(False)
-		plt.ion()
 		plt.show()
-		plt.close()

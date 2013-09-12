@@ -3,6 +3,7 @@ import numpy as np
 import operator
 import csv
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.externals import joblib
 
 # loading csv data into numpy array
 def read_data(f, header=True, test=False, rows=0):
@@ -27,8 +28,9 @@ def read_data(f, header=True, test=False, rows=0):
 
 def predictRF(train, labels, test, tmpl):
     print 'predicting...'
-    rf = RandomForestClassifier(n_estimators=2000, n_jobs=2)
+    rf = RandomForestClassifier(n_estimators=200, n_jobs=3)
     rf.fit(train, labels)
+    joblib.dump(rf, 'rfClassifier.pkl') 
     print 'done fitting...'
     rf_predictions = rf.predict(test)
     rf_probs = rf.predict_proba(test)
@@ -63,6 +65,6 @@ if __name__ == '__main__':
 
     rfPredictions, rfScore = predictRF(train, labels, test, tmpl)
 
-    np.savetxt('rfScore2000.csv', rfScore, fmt='%.2f')
-    np.savetxt('rfPredictions2000.csv', rfPredictions, fmt='%i')
+    np.savetxt('rfScore.csv', rfScore, fmt='%.2f')
+    np.savetxt('rfPredictions.csv', rfPredictions, fmt='%i')
     print 'done!!!'
